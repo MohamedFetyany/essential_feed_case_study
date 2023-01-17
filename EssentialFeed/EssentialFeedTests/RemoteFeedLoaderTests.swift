@@ -71,7 +71,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         
         expect(sut, toCompleteWith: .success([]), when: {
-            let emptyJsonList = Data("{\"items\": []}".utf8)
+            let emptyJsonList = makeItemsJson([])
             client.complete(withStatusCode: 200,data: emptyJsonList)
         })
     }
