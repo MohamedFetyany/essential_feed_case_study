@@ -41,6 +41,17 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversCacheImagesOnLessThanSevenDaysOldCache() {
+        let feed = uniqueImageFeed()
+        let fixedCurrentDate = Date()
+        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(day: -7).adding(second: 1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success(feed.models), when: {
+            store.completeRetrieval(with: feed.local ,timestamp: lessThanSevenDaysOldTimestamp)
+        })
+    }
+    
     // MARK:  Helpers
     
     private func makeSUT(
@@ -75,7 +86,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
                 XCTAssertEqual(receivedError, expectedError,file: file,line: line)
                 
             default:
-                XCTFail("Expected result \(expectedResult) ,got \(receivedResult) instead.")
+                XCTFail("Expected result \(expectedResult) ,got \(receivedResult) instead.",file: file,line: line)
             }
             exp.fulfill()
         }
@@ -85,7 +96,33 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 0.01)
     }
     
+    private func uniqueImage() -> FeedImage {
+        FeedImage(id: UUID(), description: "any", location: "any", url: anyURL)
+    }
+    
+    private func uniqueImageFeed() -> (models: [FeedImage],local: [LocalFeedImage]) {
+        let models = [uniqueImage(),uniqueImage()]
+        let local = models.map {  LocalFeedImage(id: $0.id,description: $0.description,location: $0.location ,url: $0.url) }
+        
+        return (models,local)
+    }
+    
+    private var anyURL: URL {
+        URL(string: "https://any-url.com")!
+    }
+    
     private var anyNSError: NSError {
         NSError(domain: "any error", code: 0)
+    }
+}
+
+private extension Date {
+    
+    func adding(day: Int) -> Date {
+        Calendar(identifier: .gregorian).date(byAdding: .day, value: day, to: self)!
+    }
+    
+    func adding(second: TimeInterval) -> Date {
+        self + second
     }
 }
