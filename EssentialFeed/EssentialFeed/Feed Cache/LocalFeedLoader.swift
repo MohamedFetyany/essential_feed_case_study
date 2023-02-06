@@ -33,21 +33,12 @@ public final class LocalFeedLoader {
         }
     }
     
-    private func cache(_ feed: [FeedImage],with completion: @escaping ((SaveResult) -> Void)) {
-        store.insert(feed.toLocal(),timestamp: self.currentDate()) { [weak self] error in
-            guard self != nil else { return }
-            
-            completion(error)
-        }
-    }
-    
     public func load(completion: @escaping ((LoadResult) -> Void)) {
         store.retrieve { [weak self] result in
             guard let self else { return }
             
             switch result {
             case let .failure(error):
-                self.store.deleteCachedFeed { _ in }
                 completion(.failure(error))
                 
             case let .found (feed,timestamp) where self.validate(timestamp):
@@ -59,6 +50,19 @@ public final class LocalFeedLoader {
             case .empty:
                 completion(.success([]))
             }
+        }
+    }
+    
+    public func validateCache() {
+        store.retrieve { _ in }
+        store.deleteCachedFeed { _ in }
+    }
+    
+    private func cache(_ feed: [FeedImage],with completion: @escaping ((SaveResult) -> Void)) {
+        store.insert(feed.toLocal(),timestamp: self.currentDate()) { [weak self] error in
+            guard self != nil else { return }
+            
+            completion(error)
         }
     }
     
