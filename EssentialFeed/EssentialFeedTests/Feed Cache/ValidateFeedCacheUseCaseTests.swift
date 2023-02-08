@@ -70,7 +70,7 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retrieve,.deleteCachedFeed])
     }
     
-    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocaed() {
+    func test_load_doesNotDeleteInvalidCacheResultAfterSUTInstanceHasBeenDeallocaed() {
         let store = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
         
