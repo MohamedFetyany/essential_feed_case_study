@@ -105,7 +105,7 @@ class CodableFeedStoreTests: XCTestCase {
                     break
                     
                 default:
-                    XCTFail("Expected retrieving twice from emtpy cache to deliver samp empty result,got \(firstResult) and \(secondResult) instead")
+                    XCTFail("Expected retrieving twice from emtpy cache to deliver same empty result,got \(firstResult) and \(secondResult) instead")
                 }
                 exp.fulfill()
             }
