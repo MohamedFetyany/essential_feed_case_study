@@ -79,9 +79,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
     func test_insert_deliversNoErrorOnEmptyCache() {
         let sut = makeSUT()
         
-        let insertionError = insert((uniqueImageFeed().local,Date()), to: sut)
-        
-        XCTAssertNil(insertionError,"Expected to insert cache successfully")
+        assertThatInsertDeliversNoErrorOnEmptyCache(on: sut)
     }
     
     func test_insert_deliverErrorOnInsertionError() {
@@ -126,18 +124,14 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
         let nonDeletionDirectory = noDeletePermissionURL()
         let sut = makeSUT(storeURL: nonDeletionDirectory)
         
-        let deletionError = deleteCache(from: sut)
-        
-        XCTAssertNotNil(deletionError,"Expected cache deletion to fail")
+        assertThatDeleteDeliversErrorOnDeletionError(on: sut)
     }
     
     func test_delete_hasNoSideEffectsOnDeletionError() {
         let nonDeletionDirectory = noDeletePermissionURL()
         let sut = makeSUT(storeURL: nonDeletionDirectory)
-       
-        deleteCache(from: sut)
         
-        expect(sut, toRetrieve: .empty)
+        assertThatDeleteHasNoSideEffectsOnDeletionError(on: sut)
     }
     
     func test_storeSideEffects_runSerially() {
