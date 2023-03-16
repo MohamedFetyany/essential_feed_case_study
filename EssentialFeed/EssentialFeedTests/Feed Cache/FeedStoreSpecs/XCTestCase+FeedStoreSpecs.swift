@@ -85,7 +85,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         let latestTimestamp = Date()
         insert((latestFeed,latestTimestamp), to: sut)
                 
-        expect(sut, toRetrieve: .found(feed: latestFeed, timestamp: latestTimestamp))
+        expect(sut, toRetrieve: .found(feed: latestFeed, timestamp: latestTimestamp),file: file,line: line)
     }
     
     func assertThatDeleteDeliversNoErrorOnEmptyCache(
@@ -95,7 +95,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         let deletionError = deleteCache(from: sut)
         
-        XCTAssertNil(deletionError,"Expected empty cache deletion to succeed")
+        XCTAssertNil(deletionError,"Expected empty cache deletion to succeed",file: file,line: line)
     }
     
     func assertThatDeleteHasNoSideEffectsOnEmptyCache(
@@ -105,7 +105,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         deleteCache(from: sut)
         
-        expect(sut, toRetrieve: .empty)
+        expect(sut, toRetrieve: .empty,file: file,line: line)
     }
     
     func assertThatDeleteDeliversNoErrorOnNonEmptyCache(
@@ -117,7 +117,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         let deletionError = deleteCache(from: sut)
         
-        XCTAssertNil(deletionError,"Expected non-empty cache deletion to succeed")
+        XCTAssertNil(deletionError,"Expected non-empty cache deletion to succeed",file: file,line: line)
     }
     
     func assertThatDeleteEmptiesPreviouslyInsertedCache(
@@ -129,7 +129,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         deleteCache(from: sut)
         
-        expect(sut, toRetrieve: .empty)
+        expect(sut, toRetrieve: .empty,file: file,line: line)
     }
     
     func assertThatSideEffectsRunSerially(
@@ -159,7 +159,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         waitForExpectations(timeout: 5.0)
         
-        XCTAssertEqual(completedOperationsInOrder, [op1,op2,op3],"Expected side-effects to run serially but operations finished in wrong order")
+        XCTAssertEqual(completedOperationsInOrder, [op1,op2,op3],"Expected side-effects to run serially but operations finished in wrong order",file: file,line: line)
     }
     
     @discardableResult
