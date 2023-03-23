@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD017DEF29B71C74008474F0 /* CodableFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD017DEE29B71C74008474F0 /* CodableFeedStore.swift */; };
 		DD017DF329BDAE4E008474F0 /* FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD017DF229BDAE4E008474F0 /* FeedStoreSpecs.swift */; };
 		DD017DF529BDB159008474F0 /* XCTestCase+FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD017DF429BDB159008474F0 /* XCTestCase+FeedStoreSpecs.swift */; };
 		DD017DF729BEF458008474F0 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD017DF629BEF458008474F0 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */; };
@@ -76,7 +75,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DD017DEE29B71C74008474F0 /* CodableFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFeedStore.swift; sourceTree = "<group>"; };
 		DD017DF229BDAE4E008474F0 /* FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpecs.swift; sourceTree = "<group>"; };
 		DD017DF429BDB159008474F0 /* XCTestCase+FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		DD017DF629BEF458008474F0 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveFeedStoreSpecs.swift"; sourceTree = "<group>"; };
@@ -291,7 +289,6 @@
 		DDFD547629C97E8200EAC56B /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				DDFD547829C97F4700EAC56B /* Codable */,
 				DDFD547729C97EAC00EAC56B /* CoreData */,
 			);
 			path = Infrastructure;
@@ -307,14 +304,6 @@
 				DDFD547D29C9805600EAC56B /* ManagedFeedImage.swift */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		DDFD547829C97F4700EAC56B /* Codable */ = {
-			isa = PBXGroup;
-			children = (
-				DD017DEE29B71C74008474F0 /* CodableFeedStore.swift */,
-			);
-			path = Codable;
 			sourceTree = "<group>";
 		};
 		DDFD549429CAE52400EAC56B /* EssentialFeedCacheIntegrationTests */ = {
@@ -503,7 +492,6 @@
 				DD52BADA298A86FB0053CB47 /* LocalFeedImage.swift in Sources */,
 				DD52BAC4298A54950053CB47 /* FeedStore.swift in Sources */,
 				DD52BAC2298A542E0053CB47 /* LocalFeedLoader.swift in Sources */,
-				DD017DEF29B71C74008474F0 /* CodableFeedStore.swift in Sources */,
 				DDA346D5297692990008F5E6 /* HTTPClient.swift in Sources */,
 				DDE979E7296D84B100C65256 /* FeedItem.swift in Sources */,
 				DDF7B934297FF44D00CD8E3A /* URLSessionHTTPClient.swift in Sources */,
