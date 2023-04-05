@@ -124,7 +124,7 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingImageLoadingIndicator, false,"Expected no loading indicator for second view once second image loading completes with error")
     }
     
-    func test_feedImageView_renderedLoadedImages() {
+    func test_feedImageView_rendersImageLoadedFromURL() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
