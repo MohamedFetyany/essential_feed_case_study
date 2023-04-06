@@ -18,7 +18,7 @@ public protocol FeedImageDataLoader {
     func loadImageData(from url: URL,completion: @escaping (Result) -> Void) -> FeedImageDataLoaderTask
 }
 
-public final class FeedViewController: UITableViewController {
+public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     private var tableModel = [FeedImage]()
     private var tasks = [IndexPath: FeedImageDataLoaderTask]()
@@ -35,6 +35,7 @@ public final class FeedViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.prefetchDataSource = self
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
         load()
@@ -85,6 +86,13 @@ public final class FeedViewController: UITableViewController {
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
+    }
+    
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            let model = tableModel[indexPath.row]
+            _ = imageLoader?.loadImageData(from: model.url) { _ in }
+        }
     }
 }
 
