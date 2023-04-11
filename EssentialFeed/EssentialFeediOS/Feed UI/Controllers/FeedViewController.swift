@@ -34,7 +34,7 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cellController(for: indexPath).view()
+        cellController(for: indexPath).view()
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -52,11 +52,11 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     }
     
     private func cellController(for indexPath: IndexPath) -> FeedImageCellController {
-        return tableModel[indexPath.row]
+        tableModel[indexPath.row]
     }
     
     private func cancelCellController(for indexPath: IndexPath) {
-        tableModel[indexPath.row].cancelLoad()
+        cellController(for: indexPath).cancelLoad()
     }
 }
 
