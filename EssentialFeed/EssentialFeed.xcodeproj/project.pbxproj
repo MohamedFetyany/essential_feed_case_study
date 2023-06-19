@@ -224,13 +224,13 @@
 			path = FeedStoreSpecs;
 			sourceTree = "<group>";
 		};
-		DD0774772A38785300A90084 /* Models */ = {
+		DD377C972A40235B0008838F /* Feed Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				DD0774782A3878C000A90084 /* FeedViewModel.swift */,
 				DD07747A2A3B191200A90084 /* FeedImageViewModel.swift */,
 			);
-			path = Models;
+			path = "Feed Presentation";
 			sourceTree = "<group>";
 		};
 		DD52BA8E2988F21B0053CB47 /* Feed Cache */ = {
@@ -359,7 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				DDD5B12229E52F43003BC044 /* Composers */,
-				DD0774772A38785300A90084 /* Models */,
+				DD377C972A40235B0008838F /* Feed Presentation */,
 				DDD5B10E29DED903003BC044 /* Controllers */,
 				DDD5B10F29DED971003BC044 /* Views */,
 			);
