@@ -13,8 +13,9 @@ public final class FeedUIComposer {
     private init() {}
     
     public static func feedComposeWith(feedLoader: FeedLoader,imageLoader: FeedImageDataLoader) -> FeedViewController {
-        let feedPresenter = FeedPresenter(feedLoader: feedLoader)
-        let refreshController = FeedRefreshController(loadFeed: feedPresenter.loadFeed)
+        let feedPresenter = FeedPresenter()
+        let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader, presenter: feedPresenter)
+        let refreshController = FeedRefreshController(loadFeed: presentationAdapter.loadFeed)
         let feedViewController = FeedViewController(refreshController: refreshController)
         feedPresenter.loadingView = WeakRefVirtualProxy(refreshController)
         feedPresenter.feedView = FeedViewAdapter(controller: feedViewController, imageLoader: imageLoader)
@@ -49,6 +50,31 @@ private final class FeedViewAdapter: FeedView {
     func display(_ viewModel: FeedViewModel) {
         controller?.tableModel = viewModel.feed.map { model in
             FeedImageCellController(viewModel: FeedImageViewModel(model: model, imageLoader: imageLoader,imageTransformer: UIImage.init))
+        }
+    }
+}
+
+private final class FeedLoaderPresentationAdapter {
+    
+    private let feedLoader: FeedLoader
+    private let presenter: FeedPresenter
+    
+    init(feedLoader: FeedLoader, presenter: FeedPresenter) {
+        self.feedLoader = feedLoader
+        self.presenter = presenter
+    }
+    
+    func loadFeed() {
+        presenter.didStartLoadingFeed()
+        
+        feedLoader.load { [weak self] result in
+            switch result {
+            case let .success(feed):
+                self?.presenter.didFinishLoadingFeed(with: feed)
+                
+            case let .failure(error):
+                self?.presenter.didFinishLoadingFeed(with: error)
+            }
         }
     }
 }
