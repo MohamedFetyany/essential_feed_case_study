@@ -23,7 +23,7 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
         
     var delegate: FeedViewControllerDelegate?
     
-    public let errorView = ErrorView()
+    @IBOutlet private(set) public var errorView: ErrorView!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
