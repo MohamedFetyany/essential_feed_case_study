@@ -262,13 +262,13 @@
 		DD377C972A40235B0008838F /* Feed Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				DDE6A11E2A6F8A7C00444C5A /* FeedErrorViewModel.swift */,
 				DD07747A2A3B191200A90084 /* FeedImageViewModel.swift */,
 				DD377C982A4023E80008838F /* FeedPresenter.swift */,
 				DD83FDF52A495B1100FF0691 /* FeedImagePresenter.swift */,
 				DD9F67752A53E8630004F836 /* FeedViewModel.swift */,
 				DD9F67772A53E87F0004F836 /* FeedLoadingViewModel.swift */,
 				DD9F67872A63ABA90004F836 /* Feed.strings */,
-				DDE6A11E2A6F8A7C00444C5A /* FeedErrorViewModel.swift */,
 			);
 			path = "Feed Presentation";
 			sourceTree = "<group>";
