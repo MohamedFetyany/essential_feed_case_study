@@ -16,8 +16,9 @@ class RemoteFeedImageDataLoader {
         self.client = client
     }
     
-    func loadImageData(from url: URL,completion: @escaping ((FeedImageDataLoader.Result) -> Void)) {
-        client.get(from: url) { [weak self] result in
+    @discardableResult
+    func loadImageData(from url: URL,completion: @escaping ((FeedImageDataLoader.Result) -> Void)) -> FeedImageDataLoaderTask {
+        HTTPTaskWrapper(wrapped:  client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             
             switch result {
@@ -30,11 +31,19 @@ class RemoteFeedImageDataLoader {
                 
             case let .failure(error): completion(.failure(error))
             }
-        }
+        })
     }
     
     public enum Error: Swift.Error {
         case invalidData
+    }
+    
+    private struct HTTPTaskWrapper: FeedImageDataLoaderTask {
+        let wrapped: HTTPClientTask
+        
+        func cancel() {
+            wrapped.cancel()
+        }
     }
 }
 
@@ -169,8 +178,9 @@ class RemoteFeedImageDataLoaderTests: XCTestCase {
         
         var requestedURLs: [URL] { messages.map{ $0.url } }
         
-        func get(from url: URL, completion: @escaping ((HTTPClient.Result) -> Void)) {
+        func get(from url: URL, completion: @escaping ((HTTPClient.Result) -> Void)) -> HTTPClientTask {
             messages.append((url,completion))
+            return Task()
         }
         
         func complete(with error: Error,at index: Int = 0) {
@@ -180,6 +190,10 @@ class RemoteFeedImageDataLoaderTests: XCTestCase {
         func complete(withStatusCode code: Int,data: Data,at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index], statusCode: code, httpVersion: nil, headerFields: nil)!
             messages[index].completion(.success((data,response)))
+        }
+        
+        private struct Task: HTTPClientTask {
+            func cancel() {}
         }
     }
 }
