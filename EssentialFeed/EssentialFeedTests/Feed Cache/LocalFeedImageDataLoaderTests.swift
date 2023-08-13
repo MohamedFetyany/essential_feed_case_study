@@ -8,10 +8,25 @@
 import XCTest
 import EssentialFeed
 
-final class LocalFeedImageDataLoader {
+protocol FeedImageDataStore {
+    func retreive(dataForUrl url: URL)
+}
+
+final class LocalFeedImageDataLoader: FeedImageDataLoader {
     
-    init(store: Any) {
-        
+    private let store: FeedImageDataStore
+    
+    init(store: FeedImageDataStore) {
+        self.store = store
+    }
+    
+    func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
+        store.retreive(dataForUrl: url)
+        return Task()
+    }
+    
+    private struct Task: FeedImageDataLoaderTask {
+        func cancel() {}
     }
 }
 
@@ -23,22 +38,39 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         XCTAssertTrue(store.receivedMessages.isEmpty)
     }
     
+    func test_loadImageDataFromURL_requestsStoreDataFromURL() {
+        let (sut, store) = makeSUT()
+        let url = anyURL
+        
+        _ = sut.loadImageData(from: url, completion: { _ in })
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve(dataFor: url)])
+    }
+    
     // MARK:  Helpers
     
     private func makeSUT(
         currentDate: @escaping () -> Date = Date.init,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> (sut: LocalFeedImageDataLoader,store: FeedStoreSpy) {
-        let store = FeedStoreSpy()
+    ) -> (sut: LocalFeedImageDataLoader,store: FeedSpy) {
+        let store = FeedSpy()
         let sut = LocalFeedImageDataLoader(store: store)
         trackForMemoryLeaks(store,file: file,line: line)
         trackForMemoryLeaks(sut,file: file,line: line)
         return (sut, store)
     }
     
-    private class FeedStoreSpy {
-        let receivedMessages = [Any]()
+    private class FeedSpy: FeedImageDataStore {
+        enum Message: Equatable {
+            case retrieve(dataFor: URL)
+        }
+        
+        private(set) var receivedMessages = [Message]()
+        
+        func retreive(dataForUrl url: URL) {
+            receivedMessages.append(.retrieve(dataFor: url))
+        }
     }
 
 }
