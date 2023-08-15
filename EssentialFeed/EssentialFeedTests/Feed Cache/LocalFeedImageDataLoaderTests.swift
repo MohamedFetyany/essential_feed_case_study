@@ -24,7 +24,9 @@ final class LocalFeedImageDataLoader: FeedImageDataLoader {
     
     func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
         let task = Task(completion: completion)
-        store.retreive(dataForUrl: url) { result in
+        store.retreive(dataForUrl: url) { [weak self] result in
+            guard self != nil else { return }
+            
             task.complete(with: result
                 .mapError { _ in Error.failed }
                 .flatMap { data in data.map { .success($0) } ?? .failure(Error.notFound) }
@@ -118,14 +120,27 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         XCTAssertTrue(received.isEmpty,"Expected no received results after cancelling task")
     }
     
+    func test_loadImageDataFromURL_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let store = StoreSpy()
+        var sut: LocalFeedImageDataLoader? = LocalFeedImageDataLoader(store: store)
+        
+        var received = [FeedImageDataLoader.Result]()
+        _ = sut?.loadImageData(from: anyURL) { received.append($0) }
+        
+        sut = nil
+        store.complete(with: anyData)
+        
+        XCTAssertTrue(received.isEmpty, "Expected  no received results after instance has been deallocated")
+    }
+    
     // MARK:  Helpers
     
     private func makeSUT(
         currentDate: @escaping () -> Date = Date.init,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> (sut: LocalFeedImageDataLoader,store: FeedSpy) {
-        let store = FeedSpy()
+    ) -> (sut: LocalFeedImageDataLoader,store: StoreSpy) {
+        let store = StoreSpy()
         let sut = LocalFeedImageDataLoader(store: store)
         trackForMemoryLeaks(store,file: file,line: line)
         trackForMemoryLeaks(sut,file: file,line: line)
@@ -173,7 +188,7 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         .failure(LocalFeedImageDataLoader.Error.notFound)
     }
     
-    private class FeedSpy: FeedImageDataStore {
+    private class StoreSpy: FeedImageDataStore {
     
         enum Message: Equatable {
             case retrieve(dataFor: URL)
