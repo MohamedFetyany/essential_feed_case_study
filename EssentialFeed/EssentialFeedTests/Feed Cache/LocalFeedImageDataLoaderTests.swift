@@ -16,6 +16,16 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         XCTAssertTrue(store.receivedMessages.isEmpty)
     }
     
+    func test_saveImageDataFromURL_requestsImageDataInsertionForURL() {
+        let (sut, store) = makeSUT()
+        let url = anyURL
+        let data = Data()
+        
+        sut.save(data, for: url) { _ in }
+        
+        XCTAssertEqual(store.receivedMessages, [.insert(data: data,for: url)])
+    }
+    
     func test_loadImageDataFromURL_requestsStoreDataFromURL() {
         let (sut, store) = makeSUT()
         let url = anyURL
@@ -138,6 +148,7 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
     
         enum Message: Equatable {
             case retrieve(dataFor: URL)
+            case insert(data: Data,for: URL)
         }
         
         private var completions = [(FeedImageDataStore.Result) -> Void]()
@@ -146,6 +157,10 @@ class LocalFeedImageDataLoaderTests: XCTestCase {
         func retreive(dataForUrl url: URL,completion: @escaping (FeedImageDataStore.Result) -> Void) {
             receivedMessages.append(.retrieve(dataFor: url))
             completions.append(completion)
+        }
+        
+        func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void) {
+            receivedMessages.append(.insert(data: data, for: url))
         }
         
         func complete(with error: Error,at index: Int = 0) {
