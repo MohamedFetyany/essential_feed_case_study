@@ -17,6 +17,8 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
     }
+    
+    private var onViewIsAppearing: ((FeedViewController) -> Void)?
         
     var delegate: FeedViewControllerDelegate?
     
@@ -25,7 +27,16 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        refresh()
+        onViewIsAppearing = { vc in
+            vc.onViewIsAppearing = nil
+            vc.refresh()
+        }
+    }
+    
+    public override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        
+        onViewIsAppearing?(self)
     }
     
     @IBAction private func refresh() {
