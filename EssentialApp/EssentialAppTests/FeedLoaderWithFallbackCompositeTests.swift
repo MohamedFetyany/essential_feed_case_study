@@ -21,8 +21,8 @@ class FeedLoaderWithFallbackComposite: FeedLoader {
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
         primary.load { [weak self] result in
             switch result {
-            case let .success(feed):
-                completion(.success(feed))
+            case .success:
+                completion(result)
                 
             case .failure:
                 self?.fallback.load(completion: completion)
