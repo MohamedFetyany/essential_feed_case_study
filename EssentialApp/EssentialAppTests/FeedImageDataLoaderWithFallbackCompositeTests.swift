@@ -11,13 +11,23 @@ import EssentialFeed
 class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
     
     private let primary: FeedImageDataLoader
+    private let fallback: FeedImageDataLoader
     
     init(primary: FeedImageDataLoader,fallback: FeedImageDataLoader) {
         self.primary = primary
+        self.fallback = fallback
     }
     
     func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        _ = primary.loadImageData(from: url) { _ in }
+        _ = primary.loadImageData(from: url) { [weak self] result in
+            switch result {
+            case .success:
+                break
+                
+            case .failure:
+                _ = self?.fallback.loadImageData(from: url) { _ in }
+            }
+        }
         return Task()
     }
     
@@ -43,6 +53,17 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         
         XCTAssertEqual(primaryLoader.loadedImageURLs,[url], "Expected to load URL from primary loader")
         XCTAssertTrue(fallbackLoader.loadedImageURLs.isEmpty, "Expected no loaded URLs on fallback loader")
+    }
+    
+    func test_loadImageData_loadsFromFallbackLoaderOnPrimaryLoaderFailure() {
+        let url = anyURL
+        let (sut, primaryLoader, fallbackLoader) = makeSUT()
+        
+        _ = sut.loadImageData(from: url) { _ in }
+        primaryLoader.complete(with: anyNSError)
+        
+        XCTAssertEqual(primaryLoader.loadedImageURLs,[url], "Expected to load URL from primary loader")
+        XCTAssertEqual(fallbackLoader.loadedImageURLs,[url], "Expected to load URL from fallback loader")
     }
     
     // MARK:  Helpers
@@ -85,10 +106,17 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
             messages.append((url,completion))
             return Task()
         }
+        
+        func complete(with error: Error,at index: Int = 0) {
+            messages[index].completion(.failure(error))
+        }
     }
     
     private var anyURL: URL {
         URL(string: "https://a-url.com")!
     }
-
+    
+    private var anyNSError: NSError {
+        NSError(domain: "any error", code: 0)
+    }
 }
