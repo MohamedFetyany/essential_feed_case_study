@@ -8,18 +8,12 @@
 import XCTest
 import EssentialFeed
 
-public protocol ImageDataCache {
-    typealias Result = Swift.Result<Void,Error>
-    
-    func save(_ data: Data,for url: URL,completion: @escaping (Result) -> Void)
-}
-
 final class FeedImageDataLoaderCacheDecorator: FeedImageDataLoader {
     
     private let decoratee: FeedImageDataLoader
-    private let cache: ImageDataCache
+    private let cache: FeedImageDataCache
     
-    init(decoratee: FeedImageDataLoader,cache: ImageDataCache) {
+    init(decoratee: FeedImageDataLoader,cache: FeedImageDataCache) {
         self.decoratee = decoratee
         self.cache = cache
     }
@@ -115,7 +109,7 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
         return (sut,loader)
     }
     
-    private class CacheSpy: ImageDataCache {
+    private class CacheSpy: FeedImageDataCache {
         
         private(set) var messages = [Message]()
         
@@ -123,7 +117,7 @@ class FeedImageDataLoaderCacheDecoratorTests: XCTestCase, FeedImageDataLoaderTes
             case save(data: Data,for: URL)
         }
         
-        func save(_ data: Data, for url: URL, completion: @escaping (ImageDataCache.Result) -> Void) {
+        func save(_ data: Data, for url: URL, completion: @escaping (FeedImageDataCache.Result) -> Void) {
             messages.append(.save(data: data, for: url))
             completion(.success(()))
         }
