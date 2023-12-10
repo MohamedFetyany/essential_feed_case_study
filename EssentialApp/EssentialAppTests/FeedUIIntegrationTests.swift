@@ -8,6 +8,7 @@
 import XCTest
 import EssentialFeediOS
 import EssentialFeed
+import EssentialApp
 
 final class FeedUIIntegrationTests: XCTestCase {
     

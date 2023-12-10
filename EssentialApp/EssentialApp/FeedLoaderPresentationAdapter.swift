@@ -6,17 +6,18 @@
 //
 
 import EssentialFeed
+import EssentialFeediOS
 
-final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
+public final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
     
     private let feedLoader: FeedLoader
     var presenter: FeedPresenter?
     
-    init(feedLoader: FeedLoader) {
+    public init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
     
-    func didRequestFeedRefresh() {
+    public func didRequestFeedRefresh() {
         presenter?.didStartLoadingFeed()
         
         feedLoader.load { [weak self] result in
