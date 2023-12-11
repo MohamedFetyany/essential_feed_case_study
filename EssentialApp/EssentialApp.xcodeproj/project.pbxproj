@@ -49,6 +49,7 @@
 		DDCE359D2B2581E300CD51EB /* FeedViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35942B2581E300CD51EB /* FeedViewController+TestHelpers.swift */; };
 		DDCE359F2B25824E00CD51EB /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE359E2B25824E00CD51EB /* FeedUIIntegrationTests.swift */; };
 		DDCE35A12B25847000CD51EB /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A02B25847000CD51EB /* FeedAcceptanceTests.swift */; };
+		DDCE35A32B26DC9900CD51EB /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		DDCE35942B2581E300CD51EB /* FeedViewController+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		DDCE359E2B25824E00CD51EB /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 		DDCE35A02B25847000CD51EB /* FeedAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAcceptanceTests.swift; sourceTree = "<group>"; };
+		DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 				DD61B6002B1DEDAD007C79EE /* XCTestCase+FeedLoader.swift */,
 				DD61B6082B1F06BA007C79EE /* FeedImageDataLoaderSpy.swift */,
 				DD61B60A2B1F076E007C79EE /* XCTestCase+FeedImageDataLoader.swift */,
+				DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				DDCE359B2B2581E300CD51EB /* UIImage+TestHelpers.swift in Sources */,
 				DD61B5F02B1C86F6007C79EE /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 				DDCE35982B2581E300CD51EB /* UIButton+TestHelpers.swift in Sources */,
+				DDCE35A32B26DC9900CD51EB /* HTTPClientStub.swift in Sources */,
 				DDCE359C2B2581E300CD51EB /* UIRefreshControl+TestHelpers.swift in Sources */,
 				DD61B5FF2B1DEC99007C79EE /* FeedLoaderStub.swift in Sources */,
 				DD61B5F92B1DB32C007C79EE /* XCTestCase+MemoryLeakTracking.swift in Sources */,
