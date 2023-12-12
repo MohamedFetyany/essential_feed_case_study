@@ -77,7 +77,7 @@ class CacheFeedImageDataUseCaseTests: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for load completion")
+        let exp = expectation(description: "Wait for save completion")
         
         sut.save(anyData, for: anyURL) { receievedResult in
             switch(receievedResult,expectedResult) {
