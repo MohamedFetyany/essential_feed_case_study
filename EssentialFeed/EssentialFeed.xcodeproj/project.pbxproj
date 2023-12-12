@@ -62,6 +62,8 @@
 		DDCE35AE2B281F6B00CD51EB /* EMPTY_FEED.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCE35AD2B281F6B00CD51EB /* EMPTY_FEED.png */; };
 		DDCE35B12B2822B400CD51EB /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35B02B2822B400CD51EB /* UIImage+TestHelpers.swift */; };
 		DDCE35B52B28254500CD51EB /* FEED_WITH_CONTENT.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCE35B42B28254500CD51EB /* FEED_WITH_CONTENT.png */; };
+		DDCE35B72B2825FB00CD51EB /* FEED_WITH_ERROR.png in Resources */ = {isa = PBXBuildFile; fileRef = DDCE35B62B2825FB00CD51EB /* FEED_WITH_ERROR.png */; };
+		DDCE35B92B2826BA00CD51EB /* UITableView+HeaderSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35B82B2826BA00CD51EB /* UITableView+HeaderSizing.swift */; };
 		DDD5B0EC29D56529003BC044 /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDD5B0E429D56528003BC044 /* EssentialFeediOS.framework */; };
 		DDD5B0FC29D59F97003BC044 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE979CE296D83DB00C65256 /* EssentialFeed.framework */; platformFilter = ios; };
 		DDD5B0FD29D5A069003BC044 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7B931297FCBD200CD8E3A /* XCTestCase+MemoryLeakTracking.swift */; };
@@ -181,6 +183,8 @@
 		DDCE35AD2B281F6B00CD51EB /* EMPTY_FEED.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EMPTY_FEED.png; sourceTree = "<group>"; };
 		DDCE35B02B2822B400CD51EB /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
 		DDCE35B42B28254500CD51EB /* FEED_WITH_CONTENT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_CONTENT.png; sourceTree = "<group>"; };
+		DDCE35B62B2825FB00CD51EB /* FEED_WITH_ERROR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_ERROR.png; sourceTree = "<group>"; };
+		DDCE35B82B2826BA00CD51EB /* UITableView+HeaderSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+HeaderSizing.swift"; sourceTree = "<group>"; };
 		DDD5B0E429D56528003BC044 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDD5B0EB29D56528003BC044 /* EssentialFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDD5B0FE29DAA281003BC044 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 		DDCE35A82B281E9100CD51EB /* snapshots */ = {
 			isa = PBXGroup;
 			children = (
+				DDCE35B62B2825FB00CD51EB /* FEED_WITH_ERROR.png */,
 				DDCE35B42B28254500CD51EB /* FEED_WITH_CONTENT.png */,
 				DDCE35AD2B281F6B00CD51EB /* EMPTY_FEED.png */,
 			);
@@ -457,6 +462,7 @@
 				DD9F677D2A5E64220004F836 /* UITableView+Dequeueing.swift */,
 				DDD5B10229DC27C6003BC044 /* UIView+Shimmering.swift */,
 				DDE6A1202A6F8AC400444C5A /* UIRefreshControl+Helpers.swift */,
+				DDCE35B82B2826BA00CD51EB /* UITableView+HeaderSizing.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -780,6 +786,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCE35B72B2825FB00CD51EB /* FEED_WITH_ERROR.png in Resources */,
 				DDCE35AE2B281F6B00CD51EB /* EMPTY_FEED.png in Resources */,
 				DDCE35B52B28254500CD51EB /* FEED_WITH_CONTENT.png in Resources */,
 			);
@@ -821,6 +828,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCE35B92B2826BA00CD51EB /* UITableView+HeaderSizing.swift in Sources */,
 				DDE6A11C2A6E3CF700444C5A /* ErrorView.swift in Sources */,
 				DDE6A1212A6F8AC400444C5A /* UIRefreshControl+Helpers.swift in Sources */,
 				DDD5B10329DC27C6003BC044 /* UIView+Shimmering.swift in Sources */,
