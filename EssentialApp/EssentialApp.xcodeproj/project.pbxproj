@@ -51,6 +51,7 @@
 		DDCE35A12B25847000CD51EB /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A02B25847000CD51EB /* FeedAcceptanceTests.swift */; };
 		DDCE35A32B26DC9900CD51EB /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */; };
 		DDCE35A52B26DD2200CD51EB /* InMemoryFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A42B26DD2200CD51EB /* InMemoryFeedStore.swift */; };
+		DDCE35D12B29704400CD51EB /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35D02B29704400CD51EB /* UIView+TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		DDCE35A02B25847000CD51EB /* FeedAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAcceptanceTests.swift; sourceTree = "<group>"; };
 		DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 		DDCE35A42B26DD2200CD51EB /* InMemoryFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFeedStore.swift; sourceTree = "<group>"; };
+		DDCE35D02B29704400CD51EB /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 				DD61B60A2B1F076E007C79EE /* XCTestCase+FeedImageDataLoader.swift */,
 				DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */,
 				DDCE35A42B26DD2200CD51EB /* InMemoryFeedStore.swift */,
+				DDCE35D02B29704400CD51EB /* UIView+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				DDCE35982B2581E300CD51EB /* UIButton+TestHelpers.swift in Sources */,
 				DDCE35A32B26DC9900CD51EB /* HTTPClientStub.swift in Sources */,
 				DDCE359C2B2581E300CD51EB /* UIRefreshControl+TestHelpers.swift in Sources */,
+				DDCE35D12B29704400CD51EB /* UIView+TestHelpers.swift in Sources */,
 				DD61B5FF2B1DEC99007C79EE /* FeedLoaderStub.swift in Sources */,
 				DD61B5F92B1DB32C007C79EE /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				DDCE35A12B25847000CD51EB /* FeedAcceptanceTests.swift in Sources */,

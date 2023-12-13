@@ -55,10 +55,3 @@ extension FeedUIIntegrationTests {
         RunLoop.current.run(until: Date())
     }
 }
-
-extension UIView {
-    func enforceLayoutCycle() {
-        layoutIfNeeded()
-        RunLoop.current.run(until: Date())
-    }
-}
