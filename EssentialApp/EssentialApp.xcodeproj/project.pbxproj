@@ -170,6 +170,7 @@
 		DD61B5C52B1C4FD6007C79EE /* EssentialApp */ = {
 			isa = PBXGroup;
 			children = (
+				DDCE35D22B2ABE1200CD51EB /* Supporting Files */,
 				DDCE35812B25817C00CD51EB /* FeedImageDataLoaderPresentation.swift */,
 				DDCE35852B25817C00CD51EB /* FeedLoaderPresentationAdapter.swift */,
 				DDCE35802B25817C00CD51EB /* FeedUIComposer.swift */,
@@ -180,8 +181,6 @@
 				DD61B5C82B1C4FD6007C79EE /* SceneDelegate.swift */,
 				DD61B5CA2B1C4FD6007C79EE /* ViewController.swift */,
 				DD61B5CC2B1C4FD6007C79EE /* Main.storyboard */,
-				DD61B5CF2B1C4FD7007C79EE /* Assets.xcassets */,
-				DD61B5D12B1C4FD7007C79EE /* LaunchScreen.storyboard */,
 				DD61B5D42B1C4FD7007C79EE /* Info.plist */,
 				DD61B5F12B1CA38E007C79EE /* FeedLoaderWithFallbackComposite.swift */,
 				DD61B5F52B1DB273007C79EE /* FeedImageDataLoaderWithFallbackComposite.swift */,
@@ -238,6 +237,15 @@
 				DDCE35D02B29704400CD51EB /* UIView+TestHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DDCE35D22B2ABE1200CD51EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD61B5D12B1C4FD7007C79EE /* LaunchScreen.storyboard */,
+				DD61B5CF2B1C4FD7007C79EE /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
