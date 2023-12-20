@@ -43,6 +43,7 @@
 		DDCE35A32B26DC9900CD51EB /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */; };
 		DDCE35A52B26DD2200CD51EB /* InMemoryFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35A42B26DD2200CD51EB /* InMemoryFeedStore.swift */; };
 		DDCE35D12B29704400CD51EB /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35D02B29704400CD51EB /* UIView+TestHelpers.swift */; };
+		DDCE35D42B32C15F00CD51EB /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35D32B32C15F00CD51EB /* CombineHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		DDCE35A22B26DC9800CD51EB /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 		DDCE35A42B26DD2200CD51EB /* InMemoryFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFeedStore.swift; sourceTree = "<group>"; };
 		DDCE35D02B29704400CD51EB /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
+		DDCE35D32B32C15F00CD51EB /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				DD61B5C82B1C4FD6007C79EE /* SceneDelegate.swift */,
 				DD61B5CA2B1C4FD6007C79EE /* ViewController.swift */,
 				DD61B5D42B1C4FD7007C79EE /* Info.plist */,
+				DDCE35D32B32C15F00CD51EB /* CombineHelpers.swift */,
 			);
 			path = EssentialApp;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				DD61B5CB2B1C4FD6007C79EE /* ViewController.swift in Sources */,
 				DDCE35862B25817C00CD51EB /* FeedUIComposer.swift in Sources */,
 				DDCE35872B25817C00CD51EB /* FeedImageDataLoaderPresentation.swift in Sources */,
+				DDCE35D42B32C15F00CD51EB /* CombineHelpers.swift in Sources */,
 				DD61B5C72B1C4FD6007C79EE /* AppDelegate.swift in Sources */,
 				DDCE35892B25817C00CD51EB /* MainQueueDispatchDecorator.swift in Sources */,
 				DDCE35882B25817C00CD51EB /* FeedViewAdapter.swift in Sources */,
