@@ -5,6 +5,8 @@
 //  Created by Mohamed Ibrahim on 18/07/2023.
 //
 
+import Foundation
+import Combine
 import EssentialFeed
 import EssentialFeediOS
 
@@ -13,10 +15,10 @@ final class FeedImageDataLoaderPresentation<View: FeedImageView,Image>: FeedImag
     var presenter: FeedImagePresenter<View, Image>?
     
     private let model: FeedImage
-    private let imageLoader: FeedImageDataLoader
-    private var task: FeedImageDataLoaderTask?
+    private let imageLoader: ((URL) -> FeedImageDataLoader.Publisher)
+    private var cancellable: AnyCancellable?
     
-    init(model: FeedImage, imageLoader: FeedImageDataLoader) {
+    init(model: FeedImage, imageLoader: @escaping ((URL) -> FeedImageDataLoader.Publisher)) {
         self.model = model
         self.imageLoader = imageLoader
     }
@@ -24,19 +26,20 @@ final class FeedImageDataLoaderPresentation<View: FeedImageView,Image>: FeedImag
     func didRequestImage() {
         presenter?.didStartLoadingImageData(for: model)
         
-        task = imageLoader.loadImageData(from: model.url) { [weak self,model] result in
-            switch result {
-            case let .success(data):
-                self?.presenter?.didFinishLoadingImageData(with: data, for: model)
+        cancellable = imageLoader(model.url).sink(receiveCompletion: { [weak self,model] completion in
+            switch completion {
+            case .finished: break
                 
             case let .failure(error):
                 self?.presenter?.didFinishLoadingImageData(with: error, for: model)
             }
-        }
+        }, receiveValue: { [weak self,model] data in
+            self?.presenter?.didFinishLoadingImageData(with: data, for: model)
+        })
     }
     
     func didCancelImageRequest() {
-        task?.cancel()
+        cancellable?.cancel()
     }
 }
 
