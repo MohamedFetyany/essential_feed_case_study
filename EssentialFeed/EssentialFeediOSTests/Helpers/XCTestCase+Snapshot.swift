@@ -29,7 +29,7 @@ extension XCTestCase {
             
             try? snapshotData?.write(to: temporarySnapshotURL)
             
-            XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL),Stored snapshot URL: \(snapshotURL)",file: file,line: line)
+            XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL). Stored snapshot URL: \(snapshotURL)",file: file,line: line)
         }
     }
     
