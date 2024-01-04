@@ -25,7 +25,7 @@
 		DDCE35872B25817C00CD51EB /* FeedImageDataLoaderPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35812B25817C00CD51EB /* FeedImageDataLoaderPresentation.swift */; };
 		DDCE35882B25817C00CD51EB /* FeedViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35822B25817C00CD51EB /* FeedViewAdapter.swift */; };
 		DDCE358A2B25817C00CD51EB /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35842B25817C00CD51EB /* WeakRefVirtualProxy.swift */; };
-		DDCE358B2B25817C00CD51EB /* FeedLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35852B25817C00CD51EB /* FeedLoaderPresentationAdapter.swift */; };
+		DDCE358B2B25817C00CD51EB /* LoadResourcePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE35852B25817C00CD51EB /* LoadResourcePresentationAdapter.swift */; };
 		DDCE35952B2581E300CD51EB /* FeedViewControllerTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE358C2B2581E300CD51EB /* FeedViewControllerTests+Localization.swift */; };
 		DDCE35962B2581E300CD51EB /* FeedViewControllerTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE358D2B2581E300CD51EB /* FeedViewControllerTests+LoaderSpy.swift */; };
 		DDCE35972B2581E300CD51EB /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCE358E2B2581E300CD51EB /* UIControl+TestHelpers.swift */; };
@@ -88,7 +88,7 @@
 		DDCE35812B25817C00CD51EB /* FeedImageDataLoaderPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderPresentation.swift; sourceTree = "<group>"; };
 		DDCE35822B25817C00CD51EB /* FeedViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewAdapter.swift; sourceTree = "<group>"; };
 		DDCE35842B25817C00CD51EB /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
-		DDCE35852B25817C00CD51EB /* FeedLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		DDCE35852B25817C00CD51EB /* LoadResourcePresentationAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadResourcePresentationAdapter.swift; sourceTree = "<group>"; };
 		DDCE358C2B2581E300CD51EB /* FeedViewControllerTests+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedViewControllerTests+Localization.swift"; sourceTree = "<group>"; };
 		DDCE358D2B2581E300CD51EB /* FeedViewControllerTests+LoaderSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedViewControllerTests+LoaderSpy.swift"; sourceTree = "<group>"; };
 		DDCE358E2B2581E300CD51EB /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 			children = (
 				DDCE35D22B2ABE1200CD51EB /* Supporting Files */,
 				DDCE35812B25817C00CD51EB /* FeedImageDataLoaderPresentation.swift */,
-				DDCE35852B25817C00CD51EB /* FeedLoaderPresentationAdapter.swift */,
+				DDCE35852B25817C00CD51EB /* LoadResourcePresentationAdapter.swift */,
 				DDCE35802B25817C00CD51EB /* FeedUIComposer.swift */,
 				DDCE35822B25817C00CD51EB /* FeedViewAdapter.swift */,
 				DDCE35842B25817C00CD51EB /* WeakRefVirtualProxy.swift */,
@@ -325,7 +325,7 @@
 				DDCE35882B25817C00CD51EB /* FeedViewAdapter.swift in Sources */,
 				DD61B5C92B1C4FD6007C79EE /* SceneDelegate.swift in Sources */,
 				DDCE358A2B25817C00CD51EB /* WeakRefVirtualProxy.swift in Sources */,
-				DDCE358B2B25817C00CD51EB /* FeedLoaderPresentationAdapter.swift in Sources */,
+				DDCE358B2B25817C00CD51EB /* LoadResourcePresentationAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
