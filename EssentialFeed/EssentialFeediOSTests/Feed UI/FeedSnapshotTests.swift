@@ -59,9 +59,7 @@ class FeedSnapshotTests: XCTestCase {
         return sut
     }
     
-    private func emptyFeed() -> [FeedImageCellController] {
-        []
-    }
+    private func emptyFeed() -> [CellController] { [] }
     
     private func feedWithContent() -> [ImageStub] {
         [
