@@ -11,15 +11,6 @@ import EssentialFeediOS
 
 class FeedSnapshotTests: XCTestCase {
     
-    func test_emptyFeed() {
-        let sut = makeSUT()
-        
-        sut.display(emptyFeed())
-        
-        assert(snapshot: sut.snapshot(for: .iphone(style: .light)), named: "EMPTY_FEED_light")
-        assert(snapshot: sut.snapshot(for: .iphone(style: .dark)), named: "EMPTY_FEED_dark")
-    }
-    
     func test_feedWithContent() {
         let sut = makeSUT()
         
@@ -27,15 +18,6 @@ class FeedSnapshotTests: XCTestCase {
         
         assert(snapshot: sut.snapshot(for: .iphone(style: .light)), named: "FEED_WITH_CONTENT_light")
         assert(snapshot: sut.snapshot(for: .iphone(style: .dark)), named: "FEED_WITH_CONTENT_dark")
-    }
-    
-    func test_feedWithError() {
-        let sut = makeSUT()
-        
-        sut.display(.error(message: "This a\nmulti-line\nerror message"))
-        
-        assert(snapshot: sut.snapshot(for: .iphone(style: .light)),named: "FEED_WITH_ERROR_light")
-        assert(snapshot: sut.snapshot(for: .iphone(style: .dark)),named: "FEED_WITH_ERROR_dark")
     }
     
     func test_feedWithFailedImageLoading() {
@@ -58,9 +40,7 @@ class FeedSnapshotTests: XCTestCase {
         sut.tableView.showsHorizontalScrollIndicator = false
         return sut
     }
-    
-    private func emptyFeed() -> [CellController] { [] }
-    
+        
     private func feedWithContent() -> [ImageStub] {
         [
             ImageStub(

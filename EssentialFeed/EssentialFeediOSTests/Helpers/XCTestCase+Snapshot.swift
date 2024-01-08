@@ -19,7 +19,7 @@ extension XCTestCase {
         let snapshotURL = makeSnapshotURL(named: name, file: file)
         
         guard let storedSnapshotData = try? Data(contentsOf: snapshotURL) else {
-            XCTFail("Failed to load stored snapshot at URL: \(snapshotURL). Use the 'record' method to store a snapshot before asserting.",file: file,line: line)
+            XCTFail("Failed to load stored snapshot at URL: \(snapshotURL) . Use the 'record' method to store a snapshot before asserting.",file: file,line: line)
             return
         }
         
@@ -29,7 +29,7 @@ extension XCTestCase {
             
             try? snapshotData?.write(to: temporarySnapshotURL)
             
-            XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL). Stored snapshot URL: \(snapshotURL)",file: file,line: line)
+            XCTFail("New snapshot does not match stored snapshot. New snapshot URL: \(temporarySnapshotURL) . Stored snapshot URL: \(snapshotURL)",file: file,line: line)
         }
     }
     
