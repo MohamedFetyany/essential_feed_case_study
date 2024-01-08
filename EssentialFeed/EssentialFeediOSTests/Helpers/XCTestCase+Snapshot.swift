@@ -45,6 +45,7 @@ extension XCTestCase {
         do {
             try FileManager.default.createDirectory(at: snapshotURL.deletingLastPathComponent(), withIntermediateDirectories: true)
             try snapshotData?.write(to: snapshotURL)
+            XCTFail("Record succeeded - user 'assert' to compare the snapshot from now on.",file: file,line: line)
         } catch {
             XCTFail("Failed to record snapshot with error \(error)",file: file,line: line)
         }
