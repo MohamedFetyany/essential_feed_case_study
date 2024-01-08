@@ -1,5 +1,5 @@
 //
-//  FeedViewController+TestHelpers.swift
+//  ListViewController+TestHelpers.swift
 //  EssentialFeediOSTests
 //
 //  Created by Mohamed Ibrahim on 06/04/2023.
@@ -8,7 +8,7 @@
 import UIKit
 import EssentialFeediOS
 
-extension FeedViewController {
+extension ListViewController {
     
     func simulateFeedImageViewNotNearVisible(at row: Int) {
         simulateFeedImageViewVisible(at: row)
@@ -74,7 +74,7 @@ extension FeedViewController {
     }
 }
 
-extension FeedViewController {
+extension ListViewController {
     
     func simulateAppearance() {
         if !isViewLoaded {
