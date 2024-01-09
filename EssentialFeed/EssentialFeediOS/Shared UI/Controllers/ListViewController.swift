@@ -8,16 +8,7 @@
 import UIKit
 import EssentialFeed
 
-public protocol CellController {
-    func view(in tableView: UITableView) -> UITableViewCell
-    func preload()
-    func cancelLoad()
-}
-
-public extension CellController {
-    func preload() {}
-    func cancelLoad() {}
-}
+public typealias CellController = UITableViewDataSource & UITableViewDelegate & UITableViewDataSourcePrefetching
 
 public final class ListViewController: UITableViewController, UITableViewDataSourcePrefetching, ResourceLoadingView, ResourceErrorView {
     
@@ -76,21 +67,27 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellController(for: indexPath).view(in: tableView)
+        let controller = cellController(for: indexPath)
+        return controller.tableView(tableView, cellForRowAt: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cancelCellController(for: indexPath)
+        let controller = removingCellController(for: indexPath)
+        controller?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in
-            cellController(for: indexPath).preload()
+            let controller = cellController(for: indexPath)
+            controller.tableView(tableView, prefetchRowsAt: [indexPath])
         }
     }
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(cancelCellController)
+        indexPaths.forEach { indexPath in
+            let controller = removingCellController(for: indexPath)
+            controller?.tableView?(tableView, cancelPrefetchingForRowsAt: [indexPath])
+        }
     }
     
     private func cellController(for indexPath: IndexPath) -> CellController {
@@ -99,9 +96,10 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         return controller
     }
     
-    private func cancelCellController(for indexPath: IndexPath) {
-        loadingController[indexPath]?.cancelLoad()
+    private func removingCellController(for indexPath: IndexPath) -> CellController? {
+        let controller = loadingController[indexPath]
         loadingController[indexPath] = nil
+        return controller
     }
 }
 
