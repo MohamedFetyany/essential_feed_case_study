@@ -31,8 +31,12 @@ class ImageCommentsSnapshotTests: XCTestCase {
         sut.tableView.showsHorizontalScrollIndicator = false
         return sut
     }
-        
+    
     private func comments() -> [CellController] {
+        commentControllers().map { CellController($0) }
+    }
+        
+    private func commentControllers() -> [ImageCommentCellController] {
         [
             ImageCommentCellController(
                 viewModel: ImageCommentViewModel(
