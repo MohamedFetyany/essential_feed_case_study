@@ -26,13 +26,31 @@ public final class ErrorView: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override var intrinsicContentSize: CGSize {
+        guard let size = titleLabel?.intrinsicContentSize,
+              let insets = configuration?.contentInsets
+        else {
+            return super.intrinsicContentSize
+        }
+        
+        return CGSize(width: size.width + insets.leading + insets.trailing, height: size.height + insets.top + insets.bottom)
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if let insets = configuration?.contentInsets {
+            titleLabel?.preferredMaxLayoutWidth = bounds.size.width - insets.leading - insets.trailing
+        }
+    }
+    
     private var titleAttributes: AttributeContainer {
         let paragrphStyle = NSMutableParagraphStyle()
         paragrphStyle.alignment = NSTextAlignment.center
         
         return AttributeContainer([
             .paragraphStyle: paragrphStyle,
-            .font: UIFont.systemFont(ofSize: 17)
+            .font: UIFont.preferredFont(forTextStyle: .body)
         ])
     }
     
