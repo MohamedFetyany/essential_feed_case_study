@@ -10,6 +10,8 @@ import EssentialFeed
 
 public final class ListViewController: UITableViewController, UITableViewDataSourcePrefetching, ResourceLoadingView, ResourceErrorView {
     
+    private(set) public var errorView = ErrorView()
+    
     private lazy var dataSource: UITableViewDiffableDataSource<Int, CellController> = {
         .init(tableView: tableView) { tableView, index, controller in
             controller.dataSource.tableView(tableView, cellForRowAt: index)
@@ -20,11 +22,10 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         
     public var onRefresh: (() -> Void)?
     
-    private(set) public var errorView = ErrorView()
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
         configureError()
         onViewIsAppearing = { vc in
