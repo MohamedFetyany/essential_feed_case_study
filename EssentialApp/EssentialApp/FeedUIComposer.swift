@@ -19,7 +19,7 @@ public final class FeedUIComposer {
     public static func feedComposeWith(
         feedLoader: @escaping (() -> AnyPublisher<[FeedImage],Error> ),
         imageLoader: @escaping ((URL) -> FeedImageDataLoader.Publisher),
-        selection: @escaping ((FeedImage) -> Void) = { _ in }
+        selection: @escaping ((FeedImage) -> Void)
     ) -> ListViewController {
         
         let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
