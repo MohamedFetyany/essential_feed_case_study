@@ -39,7 +39,7 @@ extension FeedUIIntegrationTests {
     ) {
         let view = sut.feedImageView(at: index)
         
-        guard let cell = view as? FeedImageCell else {
+        guard let cell = view else {
             return XCTFail("Expected \(FeedImageCell.self) instance, got \(String(describing: view)) instead",file: file,line: line)
         }
         
