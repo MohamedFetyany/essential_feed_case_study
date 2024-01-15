@@ -1,5 +1,5 @@
 //
-//  FeedUIIntegrationTests.swift
+//  CommentsUIIntegrationTests.swift
 //  EssentialFeediOSTests
 //
 //  Created by Mohamed Ibrahim on 30/03/2023.
@@ -11,7 +11,7 @@ import EssentialFeediOS
 import EssentialFeed
 import EssentialApp
 
-final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
+final class CommentsUIIntegrationTests: XCTestCase {
     
     func test_commentsView_hasTitle() {
         let (sut, _) = makeSUT()
@@ -78,7 +78,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         assertThat(sut, isRendering: [comment0,comment1])
     }
     
-    func test_loadCommentsCompletion_rendersSuccesfullyLoadedEmptyCommentsAfterNonEmptyFeed() {
+    func test_loadCommentsCompletion_rendersSuccesfullyLoadedEmptyCommentsAfterNonEmptyComments() {
         let image = makeComment()
         let (sut, loader) = makeSUT()
         
@@ -116,7 +116,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         wait(for: [exp], timeout: 1.0)
     }
     
-    override func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+    func test_loadCommentsCompletion_rendersErrorMessageOnErrorUntilNextReload() {
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
@@ -129,7 +129,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
-    override func test_tapOnError_hidesErrorMessage() {
+    func test_tapOnError_hidesErrorMessage() {
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
