@@ -39,6 +39,7 @@
 		DD8299A32B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_light_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = DD8299A02B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_light_extraExtraExtraLarge.png */; };
 		DD8299A42B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_light.png in Resources */ = {isa = PBXBuildFile; fileRef = DD8299A12B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_light.png */; };
 		DD8299A52B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DD8299A22B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_dark.png */; };
+		DD8299A72B58DF5C00C77F62 /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8299A62B58DF5C00C77F62 /* Paginated.swift */; };
 		DD9F677A2A553A340004F836 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD9F67792A553A340004F836 /* Feed.storyboard */; };
 		DD9F677C2A553A890004F836 /* Feed.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD9F677B2A553A890004F836 /* Feed.xcassets */; };
 		DD9F677E2A5E64220004F836 /* UITableView+Dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9F677D2A5E64220004F836 /* UITableView+Dequeueing.swift */; };
@@ -199,6 +200,7 @@
 		DD8299A02B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_light_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_ERROR_light_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		DD8299A12B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_ERROR_light.png; sourceTree = "<group>"; };
 		DD8299A22B57987000C77F62 /* FEED_WITH_LOAD_MORE_ERROR_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FEED_WITH_LOAD_MORE_ERROR_dark.png; sourceTree = "<group>"; };
+		DD8299A62B58DF5C00C77F62 /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
 		DD9F67792A553A340004F836 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		DD9F677B2A553A890004F836 /* Feed.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Feed.xcassets; sourceTree = "<group>"; };
 		DD9F677D2A5E64220004F836 /* UITableView+Dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Dequeueing.swift"; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				DDA346D4297692980008F5E6 /* HTTPClient.swift */,
+				DD8299A62B58DF5C00C77F62 /* Paginated.swift */,
 			);
 			path = "Shared API";
 			sourceTree = "<group>";
@@ -1178,6 +1181,7 @@
 				DD82998F2B563BE500C77F62 /* ImageCommentsEndpoint.swift in Sources */,
 				DDD3ABAB2B4524B700B1C844 /* ResourceErrorView.swift in Sources */,
 				DDD3AB972B43CE5E00B1C844 /* FeedImageDataMapper.swift in Sources */,
+				DD8299A72B58DF5C00C77F62 /* Paginated.swift in Sources */,
 				DD091FC72B393CBA0075BCCC /* ImageComment.swift in Sources */,
 				DD82998B2B563B5A00C77F62 /* FeedEndpoint.swift in Sources */,
 				DD4F86A029C04CB9000BACDC /* FeedStore.xcdatamodeld in Sources */,
