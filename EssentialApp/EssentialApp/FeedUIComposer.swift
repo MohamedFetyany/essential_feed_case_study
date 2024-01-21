@@ -29,8 +29,7 @@ public final class FeedUIComposer {
         presentationAdapter.presenter = LoadResourcePresenter<Paginated<FeedImage>,FeedViewAdapter>(
             resourceView: FeedViewAdapter(controller: feedController,imageLoader: imageLoader,selection: selection),
             loadingView: WeakRefVirtualProxy(feedController),
-            errorView: WeakRefVirtualProxy(feedController),
-            mapper: { $0 }
+            errorView: WeakRefVirtualProxy(feedController)
         )
         return feedController
     }
