@@ -54,6 +54,12 @@ extension ListViewController {
         dl?.tableView?(tableView, willDisplay: view, forRowAt: index)
     }
     
+    func simulateTapOnLoadMoreFeedError() {
+        let dl = tableView.delegate
+        let index = IndexPath(row: 0, section: feedLoadMoreSection)
+        dl?.tableView?(tableView, didSelectRowAt: index)
+    }
+    
     var isShowingLoadMoreFeedIndicator: Bool {
         return loadMoreFeedCell()?.isLoading == true
     }
