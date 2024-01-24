@@ -92,9 +92,12 @@ public extension LocalFeedLoader {
     }
 }
 
-extension Publisher where Output == [FeedImage] {
+extension Publisher {
+    func caching(to cache: FeedCache) -> AnyPublisher<Output,Failure> where Output == [FeedImage] {
+        handleEvents(receiveOutput: cache.saveIgnoringResult).eraseToAnyPublisher()
+    }
     
-    func caching(to cache: FeedCache) -> AnyPublisher<Output,Failure> {
+    func caching(to cache: FeedCache) -> AnyPublisher<Output,Failure> where Output == Paginated<FeedImage> {
         handleEvents(receiveOutput: cache.saveIgnoringResult).eraseToAnyPublisher()
     }
 }
@@ -102,6 +105,10 @@ extension Publisher where Output == [FeedImage] {
 private extension FeedCache {
     func saveIgnoringResult(_ feed: [FeedImage]) {
         save(feed) { _ in }
+    }
+    
+    func saveIgnoringResult(_ page: Paginated<FeedImage>) {
+        saveIgnoringResult(page.items)
     }
 }
 
