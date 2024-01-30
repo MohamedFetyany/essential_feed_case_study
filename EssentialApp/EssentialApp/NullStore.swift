@@ -8,11 +8,20 @@
 import Foundation
 import EssentialFeed
 
-class NullStore: FeedStore, FeedImageDataStore {
+class NullStore {}
+
+extension NullStore: FeedStore {
     
     func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         completion(.success(()))
     }
+    
+    func retreive(dataForUrl url: URL, completion: @escaping (RetrievalResult) -> Void) {
+        completion(.success(.none))
+    }
+}
+
+extension NullStore:  FeedImageDataStore {
     
     func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
         completion(.success(()))
@@ -24,9 +33,5 @@ class NullStore: FeedStore, FeedImageDataStore {
     
     func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void) {
         completion(.success(()))
-    }
-    
-    func retreive(dataForUrl url: URL, completion: @escaping (RetrievalResult) -> Void) {
-        completion(.success(.none))
     }
 }
