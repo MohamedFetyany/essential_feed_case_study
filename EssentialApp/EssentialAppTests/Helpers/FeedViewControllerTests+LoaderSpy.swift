@@ -10,7 +10,7 @@ import Combine
 import EssentialFeed
 import EssentialFeediOS
 
-class LoaderSpy: FeedImageDataLoader {
+class LoaderSpy {
     
     // MARK:  FeedLoader
     
@@ -61,34 +61,26 @@ class LoaderSpy: FeedImageDataLoader {
     
     // MARK:  FeedImageDataLoader
     
-    private(set) var imageRequests = [(url: URL,completion: (FeedImageDataLoader.Result) -> Void)]()
-    
-    var loadedImageURLs: [URL] {
-        imageRequests.map { $0.url }
-    }
+    private(set) var imageRequests = [(url: URL,publisher: PassthroughSubject<Data,Error>)]()
+
+    var loadedImageURLs: [URL] { imageRequests.map { $0.url } }
     
     private(set) var cancelledImageURLs: [URL] = []
-    
-    func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        imageRequests.append((url,completion))
-        return TaskSpy { [weak self] in
+
+    func loadImageDataPublisher(from url: URL) -> AnyPublisher<Data,Error> {
+        let publisher = PassthroughSubject<Data,Error>()
+        imageRequests.append((url,publisher))
+        return publisher.handleEvents(receiveCancel: { [weak self] in
             self?.cancelledImageURLs.append(url)
-        }
+        }).eraseToAnyPublisher()
     }
     
     func completeImageLoading(with imagedata: Data = Data(),at index: Int) {
-        imageRequests[index].completion(.success(imagedata))
+        imageRequests[index].publisher.send(imagedata)
+        imageRequests[index].publisher.send(completion: .finished)
     }
     
     func completeImageLoadingWithError(at index: Int) {
-        imageRequests[index].completion(.failure(anyNSError))
-    }
-    
-    private struct TaskSpy: FeedImageDataLoaderTask {
-        let cancelCallback: () -> Void
-        
-        func cancel() {
-            cancelCallback()
-        }
+        imageRequests[index].publisher.send(completion: .failure(anyNSError))
     }
 }
