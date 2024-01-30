@@ -93,10 +93,6 @@ class LocalFeedImageDataFromCacheUseCaseTests: XCTestCase {
         return (sut, store)
     }
     
-    private func never(file: StaticString = #filePath, line: UInt = #line) {
-        XCTFail("Expected no no invocations", file: file,line: line)
-    }
-    
     private func expect(
         _ sut: LocalFeedImageDataLoader,
         toCompleteWith expectedResult: FeedImageDataStore.RetrievalResult,
