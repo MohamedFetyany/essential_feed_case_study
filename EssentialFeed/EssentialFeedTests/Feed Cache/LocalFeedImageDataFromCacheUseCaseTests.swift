@@ -20,7 +20,7 @@ class LocalFeedImageDataFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let url = anyURL
         
-        _ = sut.loadImageData(from: url, completion: { _ in })
+        _ = try? sut.loadImageData(from: url)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve(dataFor: url)])
     }
@@ -75,22 +75,17 @@ class LocalFeedImageDataFromCacheUseCaseTests: XCTestCase {
         
         action()
         
-        let exp = expectation(description: "Wait for load completion")
-        _ = sut.loadImageData(from: anyURL) { receievedResult in
-            switch(receievedResult,expectedResult) {
-            case let (.success(receivedData),.success(expectedData)):
-                XCTAssertEqual(receivedData, expectedData,file: file,line: line)
-                
-            case let (.failure(receviedError as LocalFeedImageDataLoader.LoadError),.failure(expectedError as LocalFeedImageDataLoader.LoadError)):
-                XCTAssertEqual(receviedError, expectedError,file: file,line: line)
-                
-            default:
-                XCTFail("Expected result \(expectedResult), got \(receievedResult) instead",file: file,line: line)
-            }
+        let receievedResult = Result { try sut.loadImageData(from: anyURL) }
+        switch(receievedResult,expectedResult) {
+        case let (.success(receivedData),.success(expectedData)):
+            XCTAssertEqual(receivedData, expectedData,file: file,line: line)
             
-            exp.fulfill()
+        case let (.failure(receviedError as LocalFeedImageDataLoader.LoadError),.failure(expectedError as LocalFeedImageDataLoader.LoadError)):
+            XCTAssertEqual(receviedError, expectedError,file: file,line: line)
+            
+        default:
+            XCTFail("Expected result \(expectedResult), got \(receievedResult) instead",file: file,line: line)
         }
-        wait(for: [exp], timeout: 1.0)
     }
     
     private func failed() -> FeedImageDataStore.RetrievalResult {
