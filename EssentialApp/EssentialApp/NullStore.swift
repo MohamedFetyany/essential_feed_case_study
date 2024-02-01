@@ -16,22 +16,18 @@ extension NullStore: FeedStore {
         completion(.success(()))
     }
     
-    func retreive(dataForUrl url: URL, completion: @escaping (RetrievalResult) -> Void) {
-        completion(.success(.none))
-    }
-}
-
-extension NullStore:  FeedImageDataStore {
-    
-    func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
+    func insert(_ feed: [LocalFeedImage],timestamp: Date,completion: @escaping InsertionCompletion) {
         completion(.success(()))
     }
     
     func retrieve(completion: @escaping RetrievalCompletion) {
         completion(.success(.none))
     }
+}
+
+extension NullStore: FeedImageDataStore {
     
-    func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void) {
-        completion(.success(()))
-    }
+    func insert(_ data: Data,for url: URL) throws {}
+    
+    func retreive(dataForUrl url: URL) throws -> Data? { .none }
 }
