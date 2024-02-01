@@ -67,7 +67,7 @@ class LocalFeedImageDataFromCacheUseCaseTests: XCTestCase {
     
     private func expect(
         _ sut: LocalFeedImageDataLoader,
-        toCompleteWith expectedResult: FeedImageDataStore.RetrievalResult,
+        toCompleteWith expectedResult: Result<Data?,Error>,
         when action: (() -> Void),
         file: StaticString = #filePath,
         line: UInt = #line
@@ -88,11 +88,11 @@ class LocalFeedImageDataFromCacheUseCaseTests: XCTestCase {
         }
     }
     
-    private func failed() -> FeedImageDataStore.RetrievalResult {
+    private func failed() -> Result<Data?,Error> {
         .failure(LocalFeedImageDataLoader.LoadError.failed)
     }
     
-    private func notFound() -> FeedImageDataStore.RetrievalResult {
+    private func notFound() -> Result<Data?,Error> {
         .failure(LocalFeedImageDataLoader.LoadError.notFound)
     }
 }
