@@ -16,6 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    private lazy var scheduler = DispatchQueue(
+        label: "com.mif50.infra.queue",
+        qos: .userInitiated,
+        attributes: .concurrent
+    ).eraseToAnyScheduler()
+    
     private let baseURL = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed")!
     
     private lazy var navigationController: UINavigationController = UINavigationController(
@@ -49,10 +55,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }()
     
-    convenience init(httpClient: HTTPClient,store: FeedStore & FeedImageDataStore) {
+    convenience init(httpClient: HTTPClient,store: FeedStore & FeedImageDataStore,scheduler: AnyDispatchQueueScheduler) {
         self.init()
         self.httpClient = httpClient
         self.store = store
+        self.scheduler = scheduler
     }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -112,11 +119,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         return localImageLoader
             .loadImageDataPublisher(from: url)
-            .fallback(to: { [httpClient] in
+            .fallback(to: { [httpClient,scheduler] in
                 httpClient.getPublisher(from: url)
                     .tryMap(FeedImageDataMapper.map)
                     .caching(to: localImageLoader, using: url)
+                    .subscribe(on: scheduler)
+                    .eraseToAnyPublisher()
             })
+            .subscribe(on: scheduler)
+            .eraseToAnyPublisher()
     }
     
     private func showComments(for image: FeedImage) {
