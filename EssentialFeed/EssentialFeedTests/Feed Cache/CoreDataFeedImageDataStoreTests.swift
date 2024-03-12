@@ -48,28 +48,6 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
         expect(sut, toCompleteRetrievalWith: found(lastStoredData), for: url)
     }
     
-    func test_sideEffects_runSerially() {
-        let sut = makeSUT()
-        let url = anyURL
-        
-        let opt1 = expectation(description: "Operation 1")
-        sut.insert([localImage(url: url)], timestamp: Date()) { _ in
-            opt1.fulfill()
-        }
-        
-        let opt2 = expectation(description: "Operation 2")
-        sut.insert(anyData,for: url) { _ in
-            opt2.fulfill()
-        }
-        
-        let opt3 = expectation(description: "Operation 3")
-        sut.insert(anyData,for: url) { _ in
-            opt3.fulfill()
-        }
-        
-        wait(for: [opt1,opt2,opt3], timeout: 5.0, enforceOrder: true)
-    }
-    
     // MARK:  Helpers
     
     private func makeSUT(file: StaticString = #filePath,line: UInt = #line) -> CoreDataFeedStore {
@@ -79,34 +57,29 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
         return sut
     }
     
-    private func found(_ data: Data) -> FeedImageDataStore.RetrievalResult {
+    private func found(_ data: Data) -> Result<Data?,Error> {
         .success(data)
     }
     
-    private func notFound() -> FeedImageDataStore.RetrievalResult {
+    private func notFound() -> Result<Data?,Error> {
         .success(.none)
     }
     
     private func expect(
         _ sut: CoreDataFeedStore,
-        toCompleteRetrievalWith expectedResult: FeedImageDataStore.RetrievalResult,
+        toCompleteRetrievalWith expectedResult: Result<Data?,Error>,
         for url: URL,
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for load completion")
-        sut.retreive(dataForUrl: url) { receivedResult in
-            switch (receivedResult, expectedResult) {
-            case let (.success( receivedData), .success(expectedData)):
-                XCTAssertEqual(receivedData, expectedData, file: file, line: line)
-                
-            default:
-                XCTFail("Expected \(expectedResult), got \(receivedResult) instead", file: file, line: line)
-            }
-            exp.fulfill()
+        let receivedResult = Result { try sut.retreive(dataForUrl: url) }
+        switch (receivedResult, expectedResult) {
+        case let (.success( receivedData), .success(expectedData)):
+            XCTAssertEqual(receivedData, expectedData, file: file, line: line)
+            
+        default:
+            XCTFail("Expected \(expectedResult), got \(receivedResult) instead", file: file, line: line)
         }
-        
-        wait(for: [exp], timeout: 1.0)
     }
     
     private func insert(
@@ -116,27 +89,14 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for cache insertion")
-        let image = localImage(url: url)
-        sut.insert([image], timestamp: Date()) { result in
-            switch result {
-            case let .failure(error):
-                XCTFail("Failed to save \(image) with error \(error)", file: file, line: line)
-                exp.fulfill()
-                
-            case .success:
-                sut.insert(data, for: url) { result in
-                    if case let Result.failure(error) = result {
-                        XCTFail("Failed to insert \(data) with error \(error)", file: file, line: line)
-                    }
-                    exp.fulfill()
-                }
-            }
-            
+        do {
+            let image = localImage(url: url)
+            try sut.insert([image], timestamp: Date())
+            try sut.insert(data, for: url)
+        } catch {
+            XCTFail("Failed to insert \(data) with error \(error)", file: file, line: line)
         }
-        wait(for: [exp], timeout: 1.0)
     }
-    
     
     private func localImage(url: URL) -> LocalFeedImage {
         LocalFeedImage(id: UUID(), description: "any", location: "any", url: url)
